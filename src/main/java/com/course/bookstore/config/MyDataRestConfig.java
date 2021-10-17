@@ -1,6 +1,7 @@
 package com.course.bookstore.config;
 
 import com.course.bookstore.entity.Country;
+import com.course.bookstore.entity.Order;
 import com.course.bookstore.entity.Product;
 import com.course.bookstore.entity.ProductCategory;
 import com.course.bookstore.entity.State;
@@ -43,6 +44,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
         disableHttpMethods(Country.class, config, theUnsupportedActions);
         disableHttpMethods(State.class, config, theUnsupportedActions);
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
 
         // call an internal helper method
         exposeIds(config);
