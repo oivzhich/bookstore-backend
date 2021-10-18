@@ -25,22 +25,22 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
 
-        // retrieve the order info from dto
+        // Получение объекта Order из dto обхекта
         Order order = purchase.getOrder();
 
-        // generate tracking number
+        // Генерация уникального номера заказа
         String orderTrackingNumber = generateOrderTrackingNumber();
         order.setOrderTrackingNumber(orderTrackingNumber);
 
-        // populate order with orderItems
+        // Добавление объектов OrderItems в объект Order
         Set<OrderItem> orderItems = purchase.getOrderItems();
         orderItems.forEach(order::add);
 
-        // populate order with billingAddress and shippingAddress
+        // Добавление адреса доставки и платежного адреса в объект Order
         order.setBillingAddress(purchase.getBillingAddress());
         order.setShippingAddress(purchase.getShippingAddress());
 
-        // populate customer with order
+        // Сохранеие объекта Customer
         Customer customer = purchase.getCustomer();
 
         // check if this is an existing customer
@@ -61,8 +61,7 @@ public class CheckoutServiceImpl implements CheckoutService {
     }
 
     private String generateOrderTrackingNumber() {
-        // generate a random UUID number (UUID version-4)
-        // For details see: https://en.wikipedia.org/wiki/Universally_unique_identifier
+        // генерация рандомного UUID номера
         return UUID.randomUUID().toString();
     }
 }
